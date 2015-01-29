@@ -1,0 +1,11 @@
+<div class="slider">
+	Slider Placeholder
+</div>
+<h1>Upcoming Events</h1>
+<ul class="list-activities" ng-controller="ListController as list">
+	<li ng-repeat="activity in list.activities">
+		<h2>{{activity.title}}</h2>
+		<span class="date">{{activity.startTime | date}}</span>
+		<a class="button" href="#{{activity.permalink}}">See Event Details</a>
+	</li>
+</ul>
