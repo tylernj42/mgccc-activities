@@ -4,19 +4,20 @@
 	app = angular.module('activityList', ['ngRoute']);
 	
 	/* Global Data.  Pulls every 5 minutes */
-	app.controller('ListController', function($scope, $rootScope){
-		var list = this;
-		list.activities = $rootScope.data.activities;
-		$scope.Initialize = function (){
-			$rootScope.$watch('data', function(newValue, oldValue){
-				if (newValue !== oldValue){
-					list.activities = newValue.activities;
-				}
-			});
+	app.run(function Poller($http, $interval, $rootScope){
+		$rootScope.data = {'slider' : [], 'activities' : []};
+		var getData = function() {
+			$http.get('http://tnjdesigns.com/sandbox/pbl-2015/app-api/')
+				.then(function(response){
+				$rootScope.data = response.data;
+				});
 		};
-	
-		$scope.Initialize();
-	});
+		getData();
+		var loopGetData = function() {
+			$interval(getData, 5000);
+		};
+		loopGetData();
+ 	});
 	
 	/* Define pages and templates using routes */
 	app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
