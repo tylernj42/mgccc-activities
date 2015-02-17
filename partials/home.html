@@ -1,13 +1,36 @@
-<div class="slider" ng-controller="SliderController as Slides">
-	<ul ng-repeat="slide in Slides">
-		<img ng-src="">
-	</ul>
+<div class="home">
+	<div class="slider">
+		<ul rn-carousel rn-carousel-auto-slide="7" rn-carousel-duration="500" ng-controller="SliderController as Slider">
+			<li ng-repeat="slide in Slider.slides">
+				<div class="layer" ng-if="slide.permalink">
+					<a href="{{slide.permalink}}">
+						<img ng-src="{{slide.featuredImage}}" alt="">
+						<div class="slide-content">
+							<h2>{{slide.title}}</h2>
+							<p>{{slide.description}}</p>
+						</div>
+					</a>
+				</div>
+				<div class="layer" ng-if="!slide.permalink">
+					<img ng-src="{{slide.featuredImage}}" alt="">
+					<div class="slide-content">
+						<h2 ng-bind-html="slide.title"></h2>
+						<p ng-bind-html="slide.description"></p>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<h1>Upcoming Events</h1>
+	<ol class="list-activities" ng-controller="ListController as list">
+		<li ng-repeat="activity in list.activities">
+			<h2>{{activity.title}}</h2>
+			<div class="date-time">
+				<span class="date" ng-bind-html="activity.startTime | date:'MMM<br>d'"></span>
+				<span class="time">{{ activity.startTime | date:'h:mm a' }}</span>
+			</div>
+			<div class="excerpt">{{activity.excerpt}}</div>
+			<a class="button" href="#{{activity.permalink}}">See Event Details</a>
+		</li>
+	</ol>
 </div>
-<h1>Upcoming Events</h1>
-<ul class="list-activities" ng-controller="ListController as list">
-	<li ng-repeat="activity in list.activities">
-		<h2>{{activity.title}}</h2>
-		<span class="date">{{activity.startTime | date}}</span>
-		<a class="button" href="#{{activity.permalink}}">See Event Details</a>
-	</li>
-</ul>

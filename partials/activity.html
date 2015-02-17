@@ -1,6 +1,17 @@
-<h1>{{activity.title}}</h1>
-<span class="date">{{activity.startTime | date}}</span>
-<span class="time">{{activity.endTime}}</span>
-<span class="location">{{activity.location}}</span>
-<div class="description">{{activity.description}}</div>
-<a class="button" href="/">Go Back</a>
+<div class="single-activity">
+	<div class="banner" ng-if="activity.featuredImage">
+		<img ng-src="{{activity.featuredImage}}" alt="">
+	</div>
+	<h1>{{activity.title}}</h1>
+	<div class="date-time">
+		<span class="start-date">{{activity.startTime | date : 'MMMM d,'}}</span>
+		<span class="start-time">{{activity.startTime | date : 'h:mm a'}}</span>
+		- 
+		<span class="end-date" ng-if="activity.multiDay">{{activity.endTime | date : 'MMMM d,'}}</span>
+		<span class="end-time">{{activity.endTime | date : 'h:mm a'}}</span>
+	</div>
+	<span class="location">{{activity.location}}</span>
+	<div class="description" ng-bind-html="activity.description"></div>
+	<a class="button" href="/">&lsaquo; Go Back</a>
+</div>
+	

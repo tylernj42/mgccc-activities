@@ -1,20 +1,20 @@
 (function(){
 	/* Declare Angular App */
 	var app;
-	app = angular.module('activityList', ['ngRoute']);
+	app = angular.module('activityList', ['ngRoute', 'ngSanitize', 'angular-carousel']);
 	
-	/* Global Data.  Pulls every 5 minutes */
+	/* Get Global Data.  Pulls every 5 minutes */
 	app.run(function Poller($http, $interval, $rootScope){
-		$rootScope.data = {'slider' : [], 'activities' : []};
+		$rootScope.data = {'slides' : [], 'activities' : []};
 		var getData = function() {
-			$http.get('http://tnjdesigns.com/sandbox/pbl-2015/app-api/')
+			$http.get('http://tnjdesigns.com/sandbox/pbl-2015/app-api/?width='+window.innerWidth)
 				.then(function(response){
-				$rootScope.data = response.data;
+					$rootScope.data = response.data;
 				});
 		};
 		getData();
 		var loopGetData = function() {
-			$interval(getData, 5000);
+			$interval(getData, 1000*60);
 		};
 		loopGetData();
  	});
@@ -29,34 +29,39 @@
 	}])
 	
 	/* Controller for individual activity pages */
-	app.controller('ActivityController', function($scope, $rootScope, $routeParams){
-		console.log('rootScope:')
-		console.log($rootScope.data.activities);
-		console.log('rootParams: '+$routeParams.permalink);
+	app.controller('ActivityController', function($scope, $rootScope, $routeParams, $filter, $sce){
 		var activity = $rootScope.data.activities.filter(function(obj){
 			return obj.permalink === $routeParams.permalink;
 		});
 		$scope.activity = activity[0];
+		if($filter('date')($scope.activity.startTime, 'MMyyyy') == $filter('date')($scope.activity.endTime, 'MMyyyy') && $filter('date')($scope.activity.startTime, 'dd') != $filter('date')($scope.activity.endTime, 'dd')){
+			$scope.activity.multiDay = true;
+		}else{
+			$scope.activity.multiDay = false;
+		}
+		$scope.activity.description = $sce.trustAsHtml(unescape($scope.activity.description));
 	});
 	
 	
 	/* Controller for slider on home page */
-	app.controller('SliderController', function($http){
-		
+	app.controller('SliderController', function($scope, $rootScope){
+		var slider = this;
+		slider.slides = $rootScope.data.slides;
+		$rootScope.$watch('data', function(newValue, oldValue){
+			if (newValue !== oldValue){
+				slider.slides = newValue.slides;
+			}
+		});
 	});
 	
 	/* Controller for lists of activities on home page */
 	app.controller('ListController', function($scope, $rootScope){
 		var list = this;
 		list.activities = $rootScope.data.activities;
-		$scope.Initialize = function (){
-			$rootScope.$watch('data', function(newValue, oldValue){
-				if (newValue !== oldValue){
-					list.activities = newValue.activities;
-				}
-			});
-		};
-	
-		$scope.Initialize();
+		$rootScope.$watch('data', function(newValue, oldValue){
+			if (newValue !== oldValue){
+				list.activities = newValue.activities;
+			}
+		});
 	});
 })();

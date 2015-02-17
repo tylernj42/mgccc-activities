@@ -1,25 +1,213 @@
+/* Color Scheme
+	MGCCC blue: #002663
+	Light Blue: #2c60b1
+	Dark Blue: #001940
+	Pale Blue: #5075b1
+*/
+
 *{
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
+@font-family{
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	src: url('fonts/Roboto-Regular.ttf');
+}
+@font-family{
+	font-family: 'Roboto';
+	font-style: italic;
+	font-weight: 400;
+	src: url('fonts/Roboto-Bold.ttf');
+}
+@font-family{
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 700;
+	src: url('fonts/Roboto-Bold.ttf');
+}
+@font-family{
+	font-family: 'Roboto Slab';
+	font-style: normal;
+	font-weight: 400;
+	src: url('fonts/Roboto-Regular.ttf');
+}
+@font-family{
+	font-family: 'Roboto Slab';
+	font-style: normal;
+	font-weight: 700;
+	src: url('fonts/RobotoSlab-Bold.ttf');
+}
 body, html{height: 100%;}
 body{
 	background: #eee;
 	font-size: 16px;
-	font-family: sans-serif;
+	font-family: 'Roboto', sans-serif;
 }
-header{
+.button{
+	border: 2px solid  #2c60b1;
+	border-radius: 2px;
+	color: #2c60b1;
+	display: inline-block;
+	font-family: 'Roboto Slab', sans-serif;
+	font-weight: bold;
+	margin: 0.5rem 0;
+	padding: 0.25rem 0.5rem;
+	text-decoration: none;
+	-webkit-transition: all 0.2s;
+	transition: all 0.2s;
+}
+.button:hover, .button:active{
+	background: #2c60b1; 
+	color: #fff;
+}
+h1, h2, h3, h4, h5, h6{
+	font-family: 'Roboto Slab';
+	font-weight: bold;
+	margin: 1em 0 0.25em 0;
+}
+h1{font-size: 2rem;}
+h2{font-size: 1.8rem;}
+h3{font-size: 1.6rem;}
+h4{font-size: 1.4rem;}
+h5{font-size: 1.2rem;}
+h6{font-size: 1rem; font-weight: normal;}
+.header{
+	background: #002663;
 	height: 30px;
+	position: fixed;
+		top: 0;
+		z-index: 2;
+	width: 100%;
+}
+.header h1{
+	color: #fff;
+	font-size: 1.2rem;
+	line-height: 30px;
+	margin: 0;
+	text-align: center;
+}
+.home .list-activities li{
+	list-style: none;
+	padding: 0 0 2em 2rem;
+	position: relative;
+}
+.home .list-activities li:before{
+	background: #5075b1;
+	content: '';
+	display: block;
+	position: absolute;
+		top: 0px;
+		bottom: -1rem;
+		left: .75rem;
+	width: 5px;
+}
+.home .list-activities li:last-of-type:before{content: none;}
+.home .list-activities li .date-time{
+	color: #fff;
+	font-family: 'Roboto Slab', sans-serif;
 	position: absolute;
 		top: 0;
+		left: -1rem;
+}
+.home .list-activities li .date-time .date{
+	background: #002663;
+	border: 5px solid #5075b1;
+	border-radius: 50%;
+	box-sizing: content-box;
+	display: inline-block;
+	height: 2.2rem;
+	line-height: 1.1rem;
+	padding: 0.5rem;
+	position: relative;
+		z-index: 2;
+	text-align: center;
+	width: 2.2rem;
+}
+.home .list-activities li .time{
+	background: #5075b1;
+	border-radius: 0 5px 5px 0;
+	display: block;
+	font-size: 1.2rem;
+	line-height: 1em;
+	padding: 0.25em 0.25em 0.25em 10px;
+	position: absolute;
+		top: 50%;
+		left: 100%;
+	transform: translate(-10px, -50%);
+	text-transform: lowercase;
+	white-space: nowrap;
+}
+.home .list-activities li h2:first-of-type{
+	margin-top: 0;
+	padding-top: 2em;
+}
+.home h1{text-align: center;}
+.home .slider ul{
+	font-size: 0;
+	list-style: none;
+	padding-top: 49.8727%;
+	margin: 0 -2rem 2em -2rem;
+}
+.home .slider ul li{top: 0;}
+.home .slider ul li .layer img{
+	height: auto;
 	width: 100%;
+}
+.home .slider ul li .layer .slide-content{
+	background: rgba(0,0,0,0.75);
+	color: #fff;
+	font-size: 1rem;
+	padding: 1rem;
+	position: absolute;
+		left: 0;
+		bottom: 0;
+		right: 0;
+	width: 100%;
+}
+.home .slider ul li .layer .slide-content h2{
+	color: #fdba31;
+	font-size: 1.4rem;
+	margin-top: 0;
 }
 main{
 	background: #fff;
 	max-width: 768px;
 	margin: 0 auto;
 	min-height: 100%;
-	padding: 30px 2em 0 2em;;
+	padding: 30px 2rem 2rem 2rem;;
 	width: 100%;
+}
+p{margin-bottom: 1em;}
+.single-activity .banner{margin: 0 -2em 0 -2em;}
+.single-activity .banner img{
+	height: auto;
+	width: 100%;
+}
+.single-activity h1{
+	text-align: center;
+	margin-bottom: 0.25rem;
+}
+.single-activity .date-time{
+	color: #001940;
+	font-family: 'Roboto Slab';
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 1rem;
+	text-align: center;
+}
+@media (max-width: 480px){
+	.home .list-activities{padding-left: 1rem;}
+	.home .slider ul{margin: 0 -1em 2em -1em;}
+	.home .slider ul li .layer .slide-content{padding: 0.5rem 1rem;}
+	.home .slider ul li .layer .slide-content h2{
+		font-size: 1.2em;
+		margin: 0;
+		text-align: center;
+	}
+	.home .slider ul li .layer .slide-content p{display: none;}
+	main{padding: 30px 1rem 2rem 1rem;}
+	.single-activity .banner{margin: 0 -2em 0 -2em;}
 }
