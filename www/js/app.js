@@ -1,8 +1,10 @@
 (function(){
+    document.write('declaring app');
 	/* Declare Angular App */
 	var ngApp;
 	ngApp = angular.module('activityList', ['ngRoute', 'ngSanitize', 'angular-carousel']);
 	
+    document.write('Setting data Pull');
 	/* Get Global Data.  Pulls every 5 minutes */
 	ngApp.run(function Poller($http, $interval, $rootScope){
 		$rootScope.data = {'slides' : [], 'activities' : []};
@@ -19,6 +21,7 @@
 		loopGetData();
  	});
 	
+    document.write('Setting router');
 	/* Define pages and templates using routes */
 	ngApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
 		$routeProvider
@@ -28,6 +31,7 @@
 		$locationProvider.html5Mode(true);
 	}])
 	
+    document.write('Creating Controllers');
 	/* Controller for individual activity pages */
 	ngApp.controller('ActivityController', function($scope, $rootScope, $routeParams, $filter, $sce){
 		var activity = $rootScope.data.activities.filter(function(obj){
@@ -64,4 +68,5 @@
 			}
 		});
 	});
+    document.write('Done');
 })();
