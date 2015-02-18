@@ -28,7 +28,6 @@
 			.when('/', {templateUrl : 'partials/home.html'})
 			.when('/:permalink', {templateUrl : 'partials/activity.html', controller : 'ActivityController'})
 			.otherwise({redirectTo : '/'});
-		$locationProvider.html5Mode(true);
 	}])
 	
 	/* Controller for individual activity pages */
