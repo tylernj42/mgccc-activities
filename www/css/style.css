@@ -79,7 +79,7 @@ h6{font-size: 1rem; font-weight: normal;}
 	height: 30px;
 	position: fixed;
 		top: 0;
-		z-index: 2;
+		z-index: 10;
 	width: 100%;
 }
 .header h1{
@@ -170,10 +170,10 @@ h6{font-size: 1rem; font-weight: normal;}
 	content: '';
 	display: block;
 	height: 2rem;
+    margin: -1rem 0 0 -1rem;
 	position: absolute;
 		top: 50%;
 		left: 50%;
-	transform: translate(-50%, -50%);
 	width: 2rem;
 }
 .home .slider ul li{top: 0;}
